@@ -45,6 +45,14 @@
       document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
     });
 
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        nav.classList.remove('open');
+        menuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
     nav.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
         nav.classList.remove('open');
@@ -72,7 +80,8 @@
     function goTo(i) {
       i = Math.max(0, Math.min(i, count - 1));
       index = i;
-      track.style.transform = 'translate3d(-' + (index * 100) + '%, 0, 0)';
+      var pct = count > 1 ? (index * 100 / count) : 0;
+      track.style.transform = 'translate3d(-' + pct + '%, 0, 0)';
 
       var dots = dotsContainer.querySelectorAll('.carousel-dot');
       dots.forEach(function (dot, j) {
