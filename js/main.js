@@ -62,11 +62,14 @@
     });
   }
 
-  // ----- Carousel helper -----
+  // ----- Carousel helper (touch + mouse drag, swipe on laptop) -----
   function initCarousel(options) {
     var track = options.track;
     var dotsContainer = options.dotsContainer;
     if (!track || !dotsContainer) return;
+
+    var viewport = track.parentElement;
+    if (!viewport) return;
 
     var slides = track.children;
     var count = slides.length;
@@ -74,12 +77,19 @@
 
     var index = 0;
     var isTouch = false;
+    var isMouseDrag = false;
     var startX = 0;
     var currentX = 0;
 
-    function goTo(i) {
+    function getViewportWidth() {
+      return viewport.offsetWidth || 100;
+    }
+
+    function goTo(i, noTransition) {
       i = Math.max(0, Math.min(i, count - 1));
       index = i;
+      if (noTransition) track.style.transition = 'none';
+      else track.style.transition = '';
       var pct = count > 1 ? (index * 100 / count) : 0;
       track.style.transform = 'translate3d(-' + pct + '%, 0, 0)';
 
@@ -89,6 +99,29 @@
         dot.setAttribute('aria-selected', j === index);
       });
     }
+
+    function applyDragOffset(deltaX) {
+      var vw = getViewportWidth();
+      var slidePct = 100 / count;
+      var dragPct = (deltaX / vw) * slidePct;
+      var totalPct = (index * 100 / count) + dragPct;
+      track.style.transition = 'none';
+      track.style.transform = 'translate3d(-' + totalPct + '%, 0, 0)';
+    }
+
+    function endMouseDrag() {
+      if (!isMouseDrag) return;
+      isMouseDrag = false;
+      viewport.classList.remove('dragging');
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      var deltaX = startX - currentX;
+      var threshold = getViewportWidth() * 0.15;
+      if (deltaX > threshold) goTo(index + 1);
+      else if (deltaX < -threshold) goTo(index - 1);
+      else goTo(index);
+    }
+
     // Create dots
     dotsContainer.innerHTML = '';
     for (var d = 0; d < count; d++) {
@@ -107,40 +140,47 @@
     }
 
     // Touch support
-    track.parentElement.addEventListener('touchstart', function (e) {
+    viewport.addEventListener('touchstart', function (e) {
       isTouch = true;
       startX = e.touches[0].clientX;
       currentX = startX;
     }, { passive: true });
 
-    track.parentElement.addEventListener('touchmove', function (e) {
+    viewport.addEventListener('touchmove', function (e) {
       if (!isTouch) return;
       currentX = e.touches[0].clientX;
     }, { passive: true });
 
-    track.parentElement.addEventListener('touchend', function () {
+    viewport.addEventListener('touchend', function () {
       if (!isTouch) return;
       isTouch = false;
       var diff = startX - currentX;
-      var threshold = track.parentElement ? track.parentElement.offsetWidth * 0.2 : 60;
+      var threshold = getViewportWidth() * 0.2;
       if (diff > threshold) goTo(index + 1);
       else if (diff < -threshold) goTo(index - 1);
       else goTo(index);
     }, { passive: true });
 
-    // Mouse drag (optional)
-    var mouseStart = 0;
-    track.parentElement.addEventListener('mousedown', function (e) {
-      mouseStart = e.clientX;
+    // Mouse drag (swipe on laptop)
+    viewport.addEventListener('mousedown', function (e) {
+      if (e.button !== 0) return;
+      isMouseDrag = true;
+      startX = e.clientX;
+      currentX = startX;
+      viewport.classList.add('dragging');
+      document.body.style.cursor = 'grabbing';
+      document.body.style.userSelect = 'none';
     });
-    track.parentElement.addEventListener('mouseup', function (e) {
-      var diff = mouseStart - e.clientX;
-      var threshold = track.parentElement ? track.parentElement.offsetWidth * 0.15 : 50;
-      if (Math.abs(diff) > threshold) {
-        if (diff > 0) goTo(index + 1);
-        else goTo(index - 1);
-      }
+
+    viewport.addEventListener('mousemove', function (e) {
+      if (!isMouseDrag) return;
+      currentX = e.clientX;
+      applyDragOffset(startX - currentX);
     });
+
+    viewport.addEventListener('mouseup', endMouseDrag);
+    viewport.addEventListener('mouseleave', endMouseDrag);
+    document.addEventListener('mouseup', endMouseDrag);
 
     goTo(0);
   }
