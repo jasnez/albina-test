@@ -319,15 +319,17 @@ ul {
 .hero-title {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
-  line-height: 1.2;
+  font-size: clamp(1.85rem, 4.2vw, 3.1rem);
+  line-height: 1.22;
   letter-spacing: -0.02em;
   color: var(--color-navy);
   margin-bottom: var(--space-md);
 }
 
+/* Točno dva reda: prvi red ne prelama, drugi red ne prelama */
 .hero-title-line {
   display: block;
+  white-space: nowrap;
   padding-bottom: var(--space-xs);
   border-bottom: 3px solid var(--color-gold);
   width: fit-content;
@@ -336,6 +338,7 @@ ul {
 
 .hero-title-line2 {
   display: block;
+  white-space: nowrap;
 }
 
 .hero-desc {
@@ -382,7 +385,7 @@ ul {
 .hero-features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
+  gap: var(--space-lg);
 }
 
 .hero-feature {
@@ -390,45 +393,52 @@ ul {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: var(--space-sm);
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  padding: var(--space-md);
+  gap: var(--space-md);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-text);
+  padding: var(--space-lg) var(--space-md);
   background: var(--color-white);
-  border-radius: 12px;
+  border-radius: 14px;
   border: 1px solid var(--color-border);
-  box-shadow: 0 2px 12px rgba(27, 58, 92, 0.06);
-  transition: box-shadow var(--transition), border-color var(--transition);
+  box-shadow: 0 4px 20px rgba(27, 58, 92, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow var(--transition), border-color var(--transition), transform var(--transition);
 }
 
 .hero-feature:hover {
-  box-shadow: 0 4px 20px rgba(27, 58, 92, 0.1);
-  border-color: rgba(184, 150, 46, 0.3);
+  box-shadow: 0 12px 32px rgba(27, 58, 92, 0.12), 0 0 0 1px rgba(184, 150, 46, 0.15);
+  border-color: rgba(184, 150, 46, 0.35);
 }
 
 .hero-feature-icon {
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-navy);
+  background: linear-gradient(145deg, var(--color-navy) 0%, var(--color-navy-light) 100%);
   color: var(--color-white);
   border-radius: 50%;
-  padding: 12px;
+  padding: 14px;
+  box-shadow: 0 6px 20px rgba(21, 41, 66, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 .hero-feature.hero-feature-card .hero-feature-icon {
-  border-radius: 10px;
-  background: var(--color-white);
+  border-radius: 12px;
+  background: linear-gradient(145deg, var(--color-white) 0%, var(--color-bg-alt) 100%);
   color: var(--color-navy);
   border: 1px solid var(--color-border);
+  box-shadow: 0 4px 16px rgba(27, 58, 92, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.hero-feature.hero-feature-card .hero-feature-icon:hover {
+  box-shadow: 0 6px 24px rgba(27, 58, 92, 0.14);
 }
 
 .hero-feature-icon svg {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: block;
 }
 
@@ -1230,6 +1240,11 @@ ul {
 
   .hero-title {
     font-size: 1.75rem;
+  }
+
+  .hero-title-line,
+  .hero-title-line2 {
+    white-space: normal;
   }
 
   .cta-box {
