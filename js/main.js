@@ -222,6 +222,15 @@
     window.addEventListener('resize', initServicesCarousel);
   }
 
+  // ----- Service cards: tap/click za okret na mobilnim (flip) -----
+  document.querySelectorAll('.service-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      if (window.matchMedia('(hover: none)').matches) {
+        this.classList.toggle('flipped');
+      }
+    });
+  });
+
   // ----- Contact form -----
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {

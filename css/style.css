@@ -697,19 +697,56 @@ ul {
   display: none;
 }
 
+/* Flip card: lijevo prednja strana, na hover okret na stražnju s detaljnim tekstom */
 .service-card {
+  perspective: 1000px;
+  min-height: 220px;
+}
+
+.service-card-inner {
+  position: relative;
+  width: 100%;
+  min-height: 220px;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.service-card:hover .service-card-inner {
+  transform: rotateY(180deg);
+}
+
+.service-card.flipped .service-card-inner {
+  transform: rotateY(180deg);
+}
+
+.service-card-front,
+.service-card-back {
+  position: absolute;
+  inset: 0;
   padding: var(--space-lg);
-  background: var(--color-white);
   border-radius: 12px;
   border: 1px solid var(--color-border);
   border-top: 4px solid var(--color-gold);
-  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  background: var(--color-white);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(27, 38, 59, 0.06);
 }
 
-.service-card:hover {
+.service-card-back {
+  transform: rotateY(180deg);
   border-top-color: var(--color-gold-dark);
+  overflow-y: auto;
+}
+
+.service-card:hover .service-card-front {
+  box-shadow: none;
+}
+
+.service-card:hover .service-card-back {
   box-shadow: 0 12px 40px rgba(27, 38, 59, 0.1);
-  transform: translateY(-4px);
 }
 
 .service-card h3 {
@@ -718,12 +755,20 @@ ul {
   font-weight: 600;
   margin-bottom: var(--space-sm);
   color: var(--color-navy);
+  flex-shrink: 0;
 }
 
-.service-card p {
+.service-card-front p,
+.service-card-back p {
   font-size: 0.95rem;
   color: var(--color-text-muted);
   line-height: 1.6;
+  margin: 0;
+}
+
+.service-card-back p {
+  font-size: 0.9rem;
+  flex: 1;
 }
 
 /* ----- Testimonials ----- */
@@ -1282,6 +1327,10 @@ ul {
   .process-step:hover,
   .service-card:hover,
   .about-card:hover {
+    transform: none;
+  }
+
+  .service-card:hover .service-card-inner {
     transform: none;
   }
 
