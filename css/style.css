@@ -4,29 +4,28 @@
    ============================================ */
 
 :root {
-  /* Navy + White + Gold — vivid palette */
-  --color-navy: #1b3a5c;
-  --color-navy-dark: #0f2847;
-  --color-navy-light: #2d4a6f;
+  /* Navy + White + Gold — profesionalno, prigušeno */
+  --color-navy: #152942;
+  --color-navy-dark: #0d1c33;
+  --color-navy-light: #1e3a5c;
   --color-white: #ffffff;
-  --color-gold: #c9a227;
-  --color-gold-light: #e8c547;
-  --color-gold-dark: #9a7b1a;
-  --color-bg: #ffffff;
-  --color-bg-alt: #f5f7fa;
-  --color-bg-hero: var(--color-navy-dark);
-  --color-text: #1b3a5c;
-  --color-text-muted: #4a5f7a;
+  --color-gold: #b8962e;
+  --color-gold-light: #c9a227;
+  --color-gold-dark: #8b6919;
+  --color-bg: #f4f3f0;
+  --color-bg-alt: #ebe9e4;
+  --color-text: #152942;
+  --color-text-muted: #4a5568;
   --color-accent: var(--color-gold);
   --color-accent-hover: var(--color-gold-dark);
-  --color-border: #dde2e8;
-  /* Section backgrounds */
-  --section-about: #fefdfb;
-  --section-process: #f8f6f0;
-  --section-services: #ffffff;
+  --color-border: #d4d1ca;
+  /* Section backgrounds — toplije, manje svijetle */
+  --section-about: #f8f6f2;
+  --section-process: #f0ede8;
+  --section-services: #faf9f6;
   --section-testimonials: var(--color-navy-dark);
   --section-cta: var(--color-navy);
-  --section-contact: #f5f7fa;
+  --section-contact: #f0ede8;
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', -apple-system, sans-serif;
   --space-xs: 0.5rem;
@@ -328,15 +327,10 @@ ul {
 
 .hero-title-line {
   display: block;
-}
-
-.hero-title-accent {
-  display: block;
-  width: 48px;
-  height: 3px;
-  background: var(--color-gold);
-  margin: var(--space-sm) 0;
-  border-radius: 2px;
+  padding-bottom: var(--space-xs);
+  border-bottom: 3px solid var(--color-gold);
+  width: fit-content;
+  margin-bottom: var(--space-sm);
 }
 
 .hero-title-line2 {
