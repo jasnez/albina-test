@@ -231,14 +231,19 @@
     });
   });
 
-  // ----- Contact form -----
+  // ----- Contact form: šalje podatke na albinas@advokatvelikakladusa.ba (mailto) -----
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var formData = new FormData(contactForm);
-      var data = Object.fromEntries(formData);
-      console.log('Form data:', data);
-      alert('Hvala na poruci. Kontaktirat ćemo vas uskoro.');
+      var name = (contactForm.querySelector('#name') || {}).value || '';
+      var email = (contactForm.querySelector('#email') || {}).value || '';
+      var phone = (contactForm.querySelector('#phone') || {}).value || '';
+      var message = (contactForm.querySelector('#message') || {}).value || '';
+      var subject = 'Upit s web stranice: ' + (name || 'Bez imena');
+      var body = 'Ime i prezime: ' + name + '\nEmail: ' + email + '\nTelefon: ' + phone + '\n\nPoruka:\n' + message;
+      var mailto = 'mailto:albinas@advokatvelikakladusa.ba?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      window.location.href = mailto;
+      alert('Hvala na poruci. Otvorit će se vaš program za e-poštu — pošaljite poruku da bismo je primili.');
       contactForm.reset();
     });
   }

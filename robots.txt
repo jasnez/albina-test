@@ -1,7 +1,3 @@
-# Albina Sulejmanagić — Advokat
-# https://albina-advokat.ba
-
 User-agent: *
 Allow: /
-
-Sitemap: https://albina-advokat.ba/sitemap.xml
+Sitemap: https://advokatvelikakladusa.ba/sitemap.xml

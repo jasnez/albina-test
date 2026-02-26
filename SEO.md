@@ -5,14 +5,16 @@
 - **Meta description** (150–160 znakova) za bolji snippet u rezultatima
 - **Open Graph** (og:title, og:description, og:url, og:image, og:site_name) za dijeljenje na društvenim mrežama
 - **Twitter Card** (summary_large_image) s naslovom, opisom i slikom
-- **Canonical URL** `https://albina-advokat.ba/`
-- **Schema.org Attorney** (JSON-LD): ime, telefon, email, adresa, areaServed, knowsAbout
-- **Schema.org LegalService** (JSON-LD) za lokalni SEO
+- **Canonical URL** `https://advokatvelikakladusa.ba/`
+- **Schema.org Attorney** (JSON-LD): ime, telefon, email, adresa (uključujući Maršala Tita bb), areaServed, knowsAbout
+- **Schema.org LegalService** (JSON-LD) za lokalni SEO, s punom adresom
 - **robots.txt**: dozvoljeno indeksiranje + poveznica na sitemap
 - **sitemap.xml**: jedna stranica (glavna), lastmod i priority
-- **lang="bs"** na `<html>` (već postojalo)
+- **lang="bs"** na `<html>`
 - **Ključne riječi** proširene (imovinsko pravo, radno pravo, Unsko-sanski kanton)
 - **Slika u heroju**: `width` i `height` postavljeni (smanjen CLS)
+- **Favicon i app ikone**: favicon.ico, favicon.svg, favicon-32.png, apple-touch-icon.png, link na site.webmanifest, theme-color i msapplication-TileColor
+- **Web manifest**: site.webmanifest s nazivom, ikonama (512px), theme_color i background_color
 
 ## Što treba napraviti ručno
 
@@ -20,8 +22,8 @@
    U Vercel projektu poveži domenu `albina-advokat.ba` (ili sličnu). Bez toga stranica ostaje na `albina-test.vercel.app` i izgleda manje profesionalno.
 
 2. **Google Search Console**  
-   - Dodaj property za `https://albina-advokat.ba` (ili trenutnu domenu).  
-   - Pošalji sitemap: `https://albina-advokat.ba/sitemap.xml`.  
+   - Dodaj property za `https://advokatvelikakladusa.ba` (ili trenutnu domenu).  
+   - Pošalji sitemap: `https://advokatvelikakladusa.ba/sitemap.xml`.  
    - Provjeri da nema `noindex` / X-Robots-Tag na produkciji (Vercel preview može imati noindex).
 
 3. **Google Business Profile**  
@@ -30,8 +32,8 @@
 4. **OG slika**  
    Trenutno se koristi `assets/lady-justice.png`. Za bolji pregled na društvenim mrežama možeš napraviti posebnu sliku 1200×630 px i staviti je npr. u `assets/og-image.jpg`, zatim ažurirati `og:image` i `twitter:image` u `index.html`.
 
-5. **Email na domeni** (opcionalno)  
-   Profesionalniji izgled daje email tipa `albina@albina-advokat.ba` umjesto Hotmail adrese. Nakon toga ažuriraj kontakt u HTML-u i u Schema.org JSON-LD.
+5. **Android Chrome 192px ikona** (opcionalno)  
+   Ako dodaš `android-chrome-192.png` u root, dodaj je u `site.webmanifest` u niz `icons` za bolju podršku na Androidu.
 
 6. **Zasebne stranice po uslugama** (dugoročno)  
    Stranice tipa `/gradjansko-pravo`, `/krivicno-pravo` s jedinstvenim naslovom, opisom i sadržajem poboljšavaju rangiranje za pojedinačne upite (npr. „advokat krivično pravo Velika Kladuša”).
