@@ -5,7 +5,7 @@
 - **Meta description** (150–160 znakova) za bolji snippet u rezultatima
 - **Open Graph** (og:title, og:description, og:url, og:image, og:site_name) za dijeljenje na društvenim mrežama
 - **Twitter Card** (summary_large_image) s naslovom, opisom i slikom
-- **Canonical URL** `https://advokatvelikakladusa.ba/`
+- **Canonical URL** `https://www.advokatvelikakladusa.ba/`
 - **Schema.org Attorney** (JSON-LD): ime, telefon, email, adresa (uključujući Maršala Tita bb), areaServed, knowsAbout
 - **Schema.org LegalService** (JSON-LD) za lokalni SEO, s punom adresom
 - **robots.txt**: dozvoljeno indeksiranje + poveznica na sitemap
@@ -22,8 +22,8 @@
    U Vercel projektu poveži domenu `albina-advokat.ba` (ili sličnu). Bez toga stranica ostaje na `albina-test.vercel.app` i izgleda manje profesionalno.
 
 2. **Google Search Console**  
-   - Dodaj property za `https://advokatvelikakladusa.ba` (ili trenutnu domenu).  
-   - Pošalji sitemap: `https://advokatvelikakladusa.ba/sitemap.xml`.  
+   - Dodaj property za `https://www.advokatvelikakladusa.ba` (ili trenutnu domenu).  
+   - Pošalji sitemap: `https://www.advokatvelikakladusa.ba/sitemap.xml`.  
    - Provjeri da nema `noindex` / X-Robots-Tag na produkciji (Vercel preview može imati noindex).
 
 3. **Google Business Profile**  
